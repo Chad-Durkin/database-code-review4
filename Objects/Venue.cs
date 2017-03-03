@@ -94,6 +94,24 @@ namespace Bandtracker
             }
         }
 
+        public void DeleteVenue()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("DELETE FROM venues WHERE id = @VenueId; DELETE FROM bands_venues WHERE venues_id = @VenueId;", conn);
+
+            cmd.Parameters.Add(new SqlParameter("@VenueId", this.GetId()));
+
+            cmd.ExecuteNonQuery();
+
+            if(conn != null)
+            {
+                conn.Close();
+            }
+
+        }
+
         public static List<Venue> GetAll()
         {
             List<Venue> theVenues = new List<Venue>{};

@@ -73,6 +73,24 @@ namespace Bandtracker
             Assert.Equal(expected, result);
         }
 
+        [Fact]
+        public void Test_DeleteBand_DeletesBandFromDatabase()
+        {
+            //Arrange
+            Venue testVenue = new Venue("Vans Stadium");
+            testVenue.Save();
+            Band testBand = new Band("Linkin Park");
+            testBand.Save();
+
+            //Act
+            testVenue.AddBand(testBand.GetId());
+            testVenue.DeleteVenue();
+            int result = Venue.GetAll().Count;
+
+            //Assert
+            Assert.Equal(result, 0);
+        }
+
         public void Dispose()
         {
             Band.DeleteAll();

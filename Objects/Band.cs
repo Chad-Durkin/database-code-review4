@@ -101,7 +101,7 @@ namespace Bandtracker
 
             SqlCommand cmd = new SqlCommand("DELETE FROM bands WHERE id = @BandId; DELETE FROM bands_venues WHERE bands_id = @BandId;", conn);
 
-            cmd.Parameters.Add("@BandId", this.GetId());
+            cmd.Parameters.Add(new SqlParameter("@BandId", this.GetId()));
 
             cmd.ExecuteNonQuery();
 
