@@ -10,7 +10,7 @@ namespace Bandtracker
     {
         public BandsTest()
         {
-            DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=bandtracker_test;Integrated Security=SSPI;";
+            DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=band_tracker_test;Integrated Security=SSPI;";
         }
 
         [Fact]
@@ -36,6 +36,24 @@ namespace Bandtracker
 
             //Assert
             Assert.Equal(testList, result);
+        }
+
+        [Fact]
+        public void Test_GetVenues_GetAllVenuesThatABandPlaysAt()
+        {
+            //Arrange
+            Venue testVenue = new Venue("Vans Stadium");
+            testVenue.Save();
+            Band testBand = new Band("Linkin Park");
+            testBand.Save();
+
+            //Act
+            testVenue.AddBand(testBand.GetId());
+            List<Venue> allVenues = testBand.GetVenues();
+            List<Venue> result = new List<Venue>{testVenue};
+
+            //Assert
+            Assert.Equal(result, allVenues);
         }
 
         public void Dispose()

@@ -10,7 +10,7 @@ namespace Bandtracker
     {
         public VenuesTest()
         {
-            DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=bandtracker_test;Integrated Security=SSPI;";
+            DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=band_tracker_test;Integrated Security=SSPI;";
         }
 
         [Fact]
@@ -44,7 +44,7 @@ namespace Bandtracker
             //Arrange
             Venue testVenue = new Venue("Vans Stadium");
             testVenue.Save();
-            Band testBand = new Band("LInkin Park");
+            Band testBand = new Band("Linkin Park");
             testBand.Save();
 
             //Act
