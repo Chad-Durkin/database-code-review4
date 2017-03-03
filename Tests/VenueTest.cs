@@ -38,9 +38,27 @@ namespace Bandtracker
             Assert.Equal(testList, result);
         }
 
+        [Fact]
+        public void Test_Add_AddBandsToVenues()
+        {
+            //Arrange
+            Venue testVenue = new Venue("Vans Stadium");
+            testVenue.Save();
+            Band testBand = new Band("LInkin Park");
+            testBand.Save();
+
+            //Act
+            testVenue.AddBand(testBand.GetId());
+            List<Band> allBands = testVenue.GetBands();
+            List<Band> result = new List<Band>{testBand};
+
+            //Assert
+            Assert.Equal(result, allBands);
+        }
+
         public void Dispose()
         {
-            Venue.DeleteAll();
+            Band.DeleteAll();
             Venue.DeleteAll();
         }
     }
