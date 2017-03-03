@@ -94,6 +94,24 @@ namespace Bandtracker
             }
         }
 
+        public void DeleteBand()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("DELETE FROM bands WHERE id = @BandId; DELETE FROM bands_venues WHERE bands_id = @BandId;", conn);
+
+            cmd.Parameters.Add("@BandId", this.GetId());
+
+            cmd.ExecuteNonQuery();
+
+            if(conn != null)
+            {
+                conn.Close();
+            }
+
+        }
+
         public static List<Band> GetAll()
         {
             List<Band> allBands = new List<Band> {};
