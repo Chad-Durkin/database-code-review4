@@ -76,6 +76,24 @@ namespace Bandtracker
             return foundBand;
         }
 
+        public void UpdateBand(string newName)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("UPDATE bands SET name = @Name WHERE id = @BandId", conn);
+
+            cmd.Parameters.Add(new SqlParameter("@Name", newName));
+            cmd.Parameters.Add(new SqlParameter("@BandId", this.GetId()));
+
+            cmd.ExecuteNonQuery();
+
+            if(conn != null)
+            {
+                conn.Close();
+            }
+        }
+
         public static List<Band> GetAll()
         {
             List<Band> allBands = new List<Band> {};

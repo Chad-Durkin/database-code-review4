@@ -70,6 +70,23 @@ namespace Bandtracker
             Assert.Equal(testBand, result);
         }
 
+        [Fact]
+        public void Test_UpdateBand_UpdatesBandName()
+        {
+            //Arrange
+            Band testBand = new Band("Linkin Park");
+            testBand.Save();
+
+            //Act
+            testBand.UpdateBand("G Eazy");
+            Band updatedBand = Band.FindBand(testBand.GetId());
+            string result = updatedBand.GetName();
+            string expected = "G Eazy";
+
+            //Assert
+            Assert.Equal(expected, result);
+        }
+
         public void Dispose()
         {
             Band.DeleteAll();
