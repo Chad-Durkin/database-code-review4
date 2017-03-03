@@ -1,14 +1,37 @@
 <!DOCTYPE html>
 <html>
     <head>
-    <!-- Compiled and minified CSS -->
-     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-    <meta charset="utf-8">
-    <title>BandTracker</title>
+        <script src="../Contents/js/scripts.js"></script>
+        <script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+        <!--Import Google Icon Font-->
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <!--Import materialize.css-->
+        <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+        <!--Let browser know website is optimized for mobile-->
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link rel="stylesheet" href="../Contents/css/styles.css" type="text/css">
+        <meta charset="utf-8">
+        <title>BandTracker</title>
     </head>
     <body>
-
+        <div class="container">
+            <nav>
+                <div class="nav-wrapper">
+                    <a href="/" class="brand-logo">Band Tracker</a>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
+                        <li><a href="/band/add">Add Band</a></li>
+                        <li><a href="/venue/add">Add Venue</a></li>
+                    </ul>
+                </div>
+            </nav>
+            @RenderBody()
+        </div>
+        <!--Import jQuery before materialize.js-->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+        <script type="text/javascript" src="js/materialize.min.js"></script>
     </body>
 </html>

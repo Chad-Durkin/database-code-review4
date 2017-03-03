@@ -1,3 +1,34 @@
 @{
     Layout="/Shared/_Layout.cshtml";
 }
+
+<h5 class="center-align">Welcome to the Band Tracker, here you can find a list of Bands and Venues, also you can see which Bands are playing at certain Venues, and which Venues are hosting certain Bands!</h5>
+
+<h3 class="center-align"><strong><em>Bands</em></strong></h3>
+@if(@Model["bands"].Count == 0)
+{
+    <h4>Currently we have no bands listed to play</h4>
+}
+else
+{
+    <div class="bands">
+        @foreach(var band in Model["bands"])
+        {
+            <li class="center-align"><a href="/band/@band.GetId()">@band.GetName()</a></li>
+        }
+    </div>
+}
+<h3 class="center-align"><strong><em>Venues</em></strong></h3>
+@if(@Model["venues"].Count == 0)
+{
+    <h4>Currently we have no venues listed to host bands</h4>
+}
+else
+{
+    <div class="venues">
+        @foreach(var venue in Model["venues"])
+        {
+            <li class="center-align"><a href="/venue/@venue.GetId()">@venue.GetName()</a></li>
+        }
+    </div>
+}
