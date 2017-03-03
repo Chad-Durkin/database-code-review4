@@ -56,6 +56,23 @@ namespace Bandtracker
             Assert.Equal(result, allBands);
         }
 
+        [Fact]
+        public void Test_UpdateVenue_UpdatesVenueName()
+        {
+            //Arrange
+            Venue testVenue = new Venue("Vans Stadium");
+            testVenue.Save();
+
+            //Act
+            testVenue.UpdateVenue("Levi Stadium");
+            Venue updatedVenue = Venue.FindVenue(testVenue.GetId());
+            string result = updatedVenue.GetName();
+            string expected = "Levi Stadium";
+
+            //Assert
+            Assert.Equal(expected, result);
+        }
+
         public void Dispose()
         {
             Band.DeleteAll();

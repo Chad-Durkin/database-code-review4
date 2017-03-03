@@ -49,7 +49,7 @@ namespace Bandtracker
             DB.CloseSqlConnection(rdr, conn);
         }
 
-        public static Band Find(int id)
+        public static Band FindBand(int id)
         {
             SqlConnection conn = DB.Connection();
             conn.Open();

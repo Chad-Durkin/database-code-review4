@@ -64,7 +64,7 @@ namespace Bandtracker
             testBand.Save();
 
             //Act
-            Band result = Band.Find(testBand.GetId());
+            Band result = Band.FindBand(testBand.GetId());
 
             //Assert
             Assert.Equal(testBand, result);

@@ -49,6 +49,51 @@ namespace Bandtracker
             DB.CloseSqlConnection(rdr, conn);
         }
 
+        public static Venue FindVenue(int id)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("SELECT * FROM venues WHERE id = @VenuesId;", conn);
+
+            cmd.Parameters.Add(new SqlParameter("@VenuesId", id));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            int venueId = 0;
+            string venueName = null;
+
+            while(rdr.Read())
+            {
+                venueId = rdr.GetInt32(0);
+                venueName = rdr.GetString(1);
+            }
+
+            Venue foundVenue = new Venue(venueName, venueId);
+
+            DB.CloseSqlConnection(rdr, conn);
+
+            return foundVenue;
+        }
+
+        public void UpdateVenue(string newName)
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("UPDATE venues SET name = @Name WHERE id = @VenueId", conn);
+
+            cmd.Parameters.Add(new SqlParameter("@Name", newName));
+            cmd.Parameters.Add(new SqlParameter("@VenueId", this.GetId()));
+
+            cmd.ExecuteNonQuery();
+
+            if(conn != null)
+            {
+                conn.Close();
+            }
+        }
+
         public static List<Venue> GetAll()
         {
             List<Venue> theVenues = new List<Venue>{};
