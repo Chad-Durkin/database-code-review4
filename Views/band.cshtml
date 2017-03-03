@@ -19,7 +19,7 @@
             }
         </div>
     }
-    <div class="addVenue">
+    <div class="addNew">
         <h5>Add to a Venue</h5>
         @if(@Model["venues"].Count > 0)
         {
@@ -40,7 +40,7 @@
         }
     </div>
 
-    <div class="updateBandName">
+    <div class="updateNew">
         <h5>Update Band Name</h5>
         <form action="/band/update/@Model["band"].GetId()" method="post">
             <input type="hidden" name="_method" value="PATCH">
@@ -51,7 +51,7 @@
         </form>
     </div>
 
-    <form class="deleteBand" action="/band/delete/@Model["band"].GetId()" method="post">
+    <form class="deleteNew" action="/band/delete/@Model["band"].GetId()" method="post">
         <input type="hidden" name="_method" value="DELETE">
         <button type="submit">Delete Band</button>
     </form>

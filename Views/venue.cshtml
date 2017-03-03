@@ -1,0 +1,59 @@
+@{
+    Layout="/Shared/_Layout.cshtml";
+}
+
+<div class="specific-venue center-align">
+    <h2><strong><em>@Model["venue"].GetName()</em></strong></h2>
+
+    <h4>Current Bands</h4>
+    @if(@Model["venuebands"].Count == 0)
+    {
+        <h4>None</h4>
+    }
+    else
+    {
+        <div class="bands">
+            @foreach(var band in Model["venuebands"])
+            {
+                        <li class="center-align"><a href="/band/@band.GetId()">@band.GetName()</a></li>
+            }
+        </div>
+    }
+
+    <div class="addNew">
+        <h5>Add a Band to this Venue</h5>
+        @if(@Model["bands"].Count > 0)
+        {
+
+            <form id="band-select" action="/venue/add_band/@Model["venue"].GetId()" method="post">
+                <div class="input-field col s12">
+                    <select form="band-select" name="band-name">
+                        <option value="" disabled selected>Choose a Venue</option>
+                        @foreach(var band in Model["bands"])
+                        {
+                            <option value="@band.GetId()">@band.GetName()</option>
+
+                        }
+                    </select>
+                </div>
+                <button type="submit" name="button">Add Band</button>
+            </form>
+        }
+    </div>
+
+    <div class="updateNew">
+        <h5>Update Venue Name</h5>
+        <form action="/venue/update/@Model["venue"].GetId()" method="post">
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="hidden" name="venue-id" value="@Model["venue"].GetId()">
+            <label for="venue-name">New Venue Name:</label>
+            <input type="text" name="venue-name">
+            <button type="submit" name="button">Update Venue</button>
+        </form>
+    </div>
+
+    <form class="deleteNew" action="/venue/delete/@Model["venue"].GetId()" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit">Delete Band</button>
+    </form>
+</div>
