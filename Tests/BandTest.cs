@@ -56,6 +56,20 @@ namespace Bandtracker
             Assert.Equal(result, allVenues);
         }
 
+        [Fact]
+        public void Test_FindFindsBandsInDatabase()
+        {
+            //Arrange
+            Band testBand = new Band("Linkin Park");
+            testBand.Save();
+
+            //Act
+            Band result = Band.Find(testBand.GetId());
+
+            //Assert
+            Assert.Equal(testBand, result);
+        }
+
         public void Dispose()
         {
             Band.DeleteAll();
