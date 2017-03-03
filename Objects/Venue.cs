@@ -71,7 +71,7 @@ namespace Bandtracker
 
         public static void DeleteAll()
         {
-            DB.TableDeleteAll("venue")
+            DB.TableDeleteAll("venues");
         }
     }
 }

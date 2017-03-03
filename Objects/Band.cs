@@ -92,5 +92,10 @@ namespace Bandtracker
         {
             _name = name;
         }
+
+        public static void DeleteAll()
+        {
+            DB.TableDeleteAll("bands");
+        }
     }
 }
