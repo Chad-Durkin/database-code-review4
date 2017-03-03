@@ -2,19 +2,57 @@
     Layout="/Shared/_Layout.cshtml";
 }
 
-<h3 class="center-align">@Model.GetName()</h3>
+<div class="specific-band center-align">
+    <h2><strong><em>@Model["band"].GetName()</em></strong></h2>
 
-<h4  class="center-align">Update Band Name</h4>
-<form class="center-align" action="/band/update/@Model.GetId()" method="post">
-    <input type="hidden" name="_method" value="PATCH">
-    <input type="hidden" name="band-id" value="@Model.GetId()">
-    <label for="band-name">New Band Name:</label>
-    <input type="text" name="band-name">
-    <button type="submit" name="button">Update Band</button>
-</form>
+    <h4>Current Venues</h4>
+    @if(@Model["bandvenues"].Count == 0)
+    {
+        <h4>None</h4>
+    }
+    else
+    {
+        <div class="venues">
+            @foreach(var venue in Model["bandvenues"])
+            {
+                        <li class="center-align"><a href="/venue/@venue.GetId()">@venue.GetName()</a></li>
+            }
+        </div>
+    }
+    <div class="addVenue">
+        <h5>Add to a Venue</h5>
+        @if(@Model["venues"].Count > 0)
+        {
 
-<h4 class="center-align">Delete Band</h4>
-<form action="/band/delete/@Model.GetId()" method="post">
-  <input type="hidden" name="_method" value="DELETE">
-  <button type="submit">Delete Band</button>
-</form>
+            <form id="venue-select" action="/band/add_venue/@Model["band"].GetId()" method="post">
+                <div class="input-field col s12">
+                    <select form="venue-select" name="venue-name">
+                        <option value="" disabled selected>Choose a Venue</option>
+                        @foreach(var venue in Model["venues"])
+                        {
+                            <option value="@venue.GetId()">@venue.GetName()</option>
+
+                        }
+                    </select>
+                </div>
+                <button type="submit" name="button">Add to Venue</button>
+            </form>
+        }
+    </div>
+
+    <div class="updateBandName">
+        <h5>Update Band Name</h5>
+        <form action="/band/update/@Model["band"].GetId()" method="post">
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="hidden" name="band-id" value="@Model["band"].GetId()">
+            <label for="band-name">New Band Name:</label>
+            <input type="text" name="band-name">
+            <button type="submit" name="button">Update Band</button>
+        </form>
+    </div>
+
+    <form class="deleteBand" action="/band/delete/@Model["band"].GetId()" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <button type="submit">Delete Band</button>
+    </form>
+</div>

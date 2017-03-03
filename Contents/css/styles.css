@@ -5,3 +5,15 @@
 .venues {
     font-size: 30px;
 }
+
+.deleteBand {
+    margin-top: 50px;
+}
+
+.addVenue {
+    margin-top: 50px;
+}
+
+.updateBandName {
+    margin-top: 50px;
+}

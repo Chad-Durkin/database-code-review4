@@ -38,8 +38,21 @@ namespace Bandtracker
                 return View["index.cshtml", model];
             };
             Get["/band/{id}"] = parameters => {
-                Band model = Band.FindBand(parameters.id);
+                Band theBand = Band.FindBand(parameters.id);
+                Dictionary<string, object> model = new Dictionary<string, object>{};
+                model.Add("band", theBand);
+                model.Add("bandvenues", theBand.GetVenues());
+                model.Add("venues", Venue.GetAll());
                 return View["band.cshtml", model];
+            };
+            Post["/band/add_venue/{id}"] = parameters => {
+                Band theBook = Band.FindBand(parameters.id);
+                Venue theVenue = Venue.FindVenue(Request.Form["venue-name"]);
+                theVenue.AddBand(theBook.GetId());
+                Dictionary<string, object> model = new Dictionary<string, object>{};
+                model.Add("bands", Band.GetAll());
+                model.Add("venues", Venue.GetAll());
+                return View["index.cshtml", model];
             };
             Patch["/band/update/{id}"] = parameters => {
                 Band updateBand = Band.FindBand(parameters.id);
