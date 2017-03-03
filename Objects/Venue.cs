@@ -35,7 +35,7 @@ namespace Bandtracker
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("INSERT INTO venues (name) OUTPUT INSERTED.id VALUES (@Name)");
+            SqlCommand cmd = new SqlCommand("INSERT INTO venues (name) OUTPUT INSERTED.id VALUES (@Name);", conn);
 
             cmd.Parameters.Add(new SqlParameter("@Name", this.GetName()));
 
@@ -49,28 +49,28 @@ namespace Bandtracker
             DB.CloseSqlConnection(rdr, conn);
         }
 
-        public static List<Band> GetAll()
+        public static List<Venue> GetAll()
         {
-            List<Band> allBands = new List<Band> {};
+            List<Venue> allVenues = new List<Venue> {};
 
             SqlConnection conn = DB.Connection();
             conn.Open();
 
-            SqlCommand cmd = new SqlCommand("SELECT * FROM bands", conn);
+            SqlCommand cmd = new SqlCommand("SELECT * FROM venues", conn);
 
             SqlDataReader rdr = cmd.ExecuteReader();
 
             while(rdr.Read())
             {
-                int bandId = rdr.GetInt32(0);
-                string bandName = rdr.GetString(1);
-                Band newBand = new Band(bandName, bandId);
-                allBands.Add(newBand);
+                int venueId = rdr.GetInt32(0);
+                string venueName = rdr.GetString(1);
+                Venue newVenue = new Venue(venueName, venueId);
+                allVenues.Add(newVenue);
             }
 
             DB.CloseSqlConnection(rdr, conn);
 
-            return allBands;
+            return allVenues;
         }
 
         public int GetId()
