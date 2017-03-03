@@ -30,6 +30,25 @@ namespace Bandtracker
             }
         }
 
+        public void Save()
+        {
+            SqlConnection conn = DB.Connection();
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("INSERT INTO venues (name) OUTPUT INSERTED.id VALUES (@Name)");
+
+            cmd.Parameters.Add(new SqlParameter("@Name", this.GetName()));
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            while(rdr.Read())
+            {
+                this._id = rdr.GetInt32(0);
+            }
+
+            DB.CloseSqlConnection(rdr, conn);
+        }
+
         public int GetId()
         {
             return _id;
