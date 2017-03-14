@@ -10,7 +10,6 @@ namespace Bandtracker
         public HomeModule()
         {
             Get["/"] = _ => {
-                Venue.DeleteAll();
                 Dictionary<string, object> model = new Dictionary<string, object>{};
                 model.Add("bands", Band.GetAll());
                 model.Add("venues", Venue.GetAll());
@@ -24,6 +23,7 @@ namespace Bandtracker
                 return View["index.cshtml", model];
             };
             Get["/venue/delete_all"] = _ => {
+                Venue.DeleteAll();
                 Dictionary<string, object> model = new Dictionary<string, object>{};
                 model.Add("bands", Band.GetAll());
                 model.Add("venues", Venue.GetAll());
